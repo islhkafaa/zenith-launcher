@@ -27,6 +27,8 @@ namespace Zenith_Launcher
             services.AddSingleton<DatabaseInitializer>();
             services.AddSingleton<Data.Repositories.IGameRepository, Data.Repositories.GameRepository>();
             services.AddSingleton<Services.GameLibrary.IGameLibraryService, Services.GameLibrary.GameLibraryService>();
+            services.AddSingleton<Services.GameLauncher.IGameLauncherService, Services.GameLauncher.GameLauncherService>();
+            services.AddSingleton<Services.PlayTime.IPlayTimeTracker, Services.PlayTime.PlayTimeTracker>();
             services.AddSingleton<Data.SampleDataSeeder>();
 
             services.AddSingleton<INavigationService, NavigationService>();

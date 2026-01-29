@@ -7,9 +7,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Width="200"
-    Height="280">
+    Height="280"
+    PointerEntered="OnPointerEntered"
+    PointerExited="OnPointerExited">
 
-    <Grid CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+    <Grid x:Name="RootGrid" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+        <Grid.ContextFlyout>
+            <MenuFlyout>
+                <MenuFlyoutItem Text="Launch" Click="OnLaunchClick">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE768;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutSeparator/>
+                <MenuFlyoutItem Text="Delete" Click="OnDeleteClick">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE74D;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+            </MenuFlyout>
+        </Grid.ContextFlyout>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>

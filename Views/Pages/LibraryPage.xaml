@@ -43,7 +43,11 @@
 
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:Game">
-                    <controls:GameCard Game="{x:Bind}" Margin="8"/>
+                    <controls:GameCard
+                        Game="{x:Bind}"
+                        Margin="8"
+                        LaunchRequested="OnGameLaunchRequested"
+                        DeleteRequested="OnGameDeleteRequested"/>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>

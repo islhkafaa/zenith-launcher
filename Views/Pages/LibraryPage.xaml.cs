@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using Zenith_Launcher.Models;
 using Zenith_Launcher.Services.DependencyInjection;
 using Zenith_Launcher.ViewModels;
 
@@ -29,6 +30,16 @@ namespace Zenith_Launcher.Views.Pages
         public Visibility ShowEmptyState(int count, bool isLoading)
         {
             return !isLoading && count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private async void OnGameLaunchRequested(object sender, Game game)
+        {
+            await ViewModel.LaunchGameCommand.ExecuteAsync(game);
+        }
+
+        private async void OnGameDeleteRequested(object sender, Game game)
+        {
+            await ViewModel.DeleteGameCommand.ExecuteAsync(game);
         }
     }
 
