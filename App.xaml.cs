@@ -31,6 +31,11 @@ namespace Zenith_Launcher
             services.AddSingleton<Services.GameLauncher.IGameLauncherService, Services.GameLauncher.GameLauncherService>();
             services.AddSingleton<Services.PlayTime.IPlayTimeTracker, Services.PlayTime.PlayTimeTracker>();
 
+            services.AddSingleton<Services.StoreScanner.SteamScanner>();
+            services.AddSingleton<Services.StoreScanner.EpicScanner>();
+            services.AddSingleton<Services.StoreScanner.GogScanner>();
+            services.AddSingleton<Services.StoreIntegration.IStoreIntegrationService, Services.StoreIntegration.StoreIntegrationService>();
+
             services.AddSingleton<INavigationService, NavigationService>();
 
             services.AddTransient<ShellViewModel>();
