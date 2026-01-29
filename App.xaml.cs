@@ -12,6 +12,7 @@ namespace Zenith_Launcher
     {
         private Window? _window;
         private IServiceProvider? _serviceProvider;
+        public static Window? MainWindow { get; set; }
 
         public App()
         {
@@ -29,7 +30,6 @@ namespace Zenith_Launcher
             services.AddSingleton<Services.GameLibrary.IGameLibraryService, Services.GameLibrary.GameLibraryService>();
             services.AddSingleton<Services.GameLauncher.IGameLauncherService, Services.GameLauncher.GameLauncherService>();
             services.AddSingleton<Services.PlayTime.IPlayTimeTracker, Services.PlayTime.PlayTimeTracker>();
-            services.AddSingleton<Data.SampleDataSeeder>();
 
             services.AddSingleton<INavigationService, NavigationService>();
 
@@ -42,18 +42,16 @@ namespace Zenith_Launcher
             ServiceLocator.Initialize(_serviceProvider);
         }
 
-        protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             if (_serviceProvider != null)
             {
                 var dbInitializer = _serviceProvider.GetRequiredService<DatabaseInitializer>();
                 dbInitializer.Initialize();
-
-                var seeder = _serviceProvider.GetRequiredService<Data.SampleDataSeeder>();
-                await seeder.SeedAsync();
             }
 
             _window = new MainWindow();
+            MainWindow = _window;
             _window.Activate();
         }
     }

@@ -24,7 +24,13 @@ namespace Zenith_Launcher.Data
                     InstallPath TEXT NOT NULL,
                     CoverImagePath TEXT,
                     LastPlayed TEXT,
-                    PlayTime INTEGER
+                    PlayTime INTEGER,
+                    StoreId TEXT,
+                    LaunchParameters TEXT,
+                    Description TEXT,
+                    Developer TEXT,
+                    Publisher TEXT,
+                    ReleaseDate TEXT
                 )
             ";
             createTableCommand.ExecuteNonQuery();

@@ -10,7 +10,7 @@
     Title="Zenith Launcher">
 
     <Window.SystemBackdrop>
-        <MicaBackdrop />
+        <MicaBackdrop Kind="BaseAlt"/>
     </Window.SystemBackdrop>
 
     <Grid>

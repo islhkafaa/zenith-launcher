@@ -14,29 +14,29 @@ namespace Zenith_Launcher.Services.GameLibrary
             _gameRepository = gameRepository;
         }
 
-        public Task<List<Game>> GetAllGamesAsync()
+        public async Task<List<Game>> GetAllGamesAsync()
         {
-            return _gameRepository.GetAllAsync();
+            return await _gameRepository.GetAllAsync();
         }
 
-        public Task<Game?> GetGameByIdAsync(int id)
+        public async Task<Game?> GetGameByIdAsync(int id)
         {
-            return _gameRepository.GetByIdAsync(id);
+            return await _gameRepository.GetByIdAsync(id);
         }
 
-        public Task<int> AddGameAsync(Game game)
+        public async Task<int> AddGameAsync(Game game)
         {
-            return _gameRepository.AddAsync(game);
+            return await _gameRepository.AddAsync(game);
         }
 
-        public Task UpdateGameAsync(Game game)
+        public async Task UpdateGameAsync(Game game)
         {
-            return _gameRepository.UpdateAsync(game);
+            await _gameRepository.UpdateAsync(game);
         }
 
-        public Task DeleteGameAsync(int id)
+        public async Task DeleteGameAsync(int id)
         {
-            return _gameRepository.DeleteAsync(id);
+            await _gameRepository.DeleteAsync(id);
         }
     }
 }

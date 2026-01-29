@@ -55,8 +55,8 @@ namespace Zenith_Launcher.Data.Repositories
 
             var command = connection.CreateCommand();
             command.CommandText = @"
-                INSERT INTO Games (Title, Platform, InstallPath, CoverImagePath, LastPlayed, PlayTime)
-                VALUES (@title, @platform, @installPath, @coverImagePath, @lastPlayed, @playTime);
+                INSERT INTO Games (Title, Platform, InstallPath, CoverImagePath, LastPlayed, PlayTime, StoreId, LaunchParameters, Description, Developer, Publisher, ReleaseDate)
+                VALUES (@title, @platform, @installPath, @coverImagePath, @lastPlayed, @playTime, @storeId, @launchParameters, @description, @developer, @publisher, @releaseDate);
                 SELECT last_insert_rowid();
             ";
 
@@ -78,7 +78,13 @@ namespace Zenith_Launcher.Data.Repositories
                     InstallPath = @installPath,
                     CoverImagePath = @coverImagePath,
                     LastPlayed = @lastPlayed,
-                    PlayTime = @playTime
+                    PlayTime = @playTime,
+                    StoreId = @storeId,
+                    LaunchParameters = @launchParameters,
+                    Description = @description,
+                    Developer = @developer,
+                    Publisher = @publisher,
+                    ReleaseDate = @releaseDate
                 WHERE Id = @id
             ";
 
@@ -107,6 +113,12 @@ namespace Zenith_Launcher.Data.Repositories
             command.Parameters.AddWithValue("@coverImagePath", game.CoverImagePath ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@lastPlayed", game.LastPlayed?.ToString("o") ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@playTime", (long)game.PlayTime.TotalSeconds);
+            command.Parameters.AddWithValue("@storeId", game.StoreId ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@launchParameters", game.LaunchParameters ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@description", game.Description ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@developer", game.Developer ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@publisher", game.Publisher ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@releaseDate", game.ReleaseDate?.ToString("o") ?? (object)DBNull.Value);
         }
 
         private Game MapToGame(SqliteDataReader reader)
@@ -119,7 +131,13 @@ namespace Zenith_Launcher.Data.Repositories
                 InstallPath = reader.GetString(3),
                 CoverImagePath = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
                 LastPlayed = reader.IsDBNull(5) ? null : DateTime.Parse(reader.GetString(5)),
-                PlayTime = TimeSpan.FromSeconds(reader.GetInt64(6))
+                PlayTime = TimeSpan.FromSeconds(reader.GetInt64(6)),
+                StoreId = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                LaunchParameters = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
+                Description = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
+                Developer = reader.IsDBNull(10) ? string.Empty : reader.GetString(10),
+                Publisher = reader.IsDBNull(11) ? string.Empty : reader.GetString(11),
+                ReleaseDate = reader.IsDBNull(12) ? null : DateTime.Parse(reader.GetString(12))
             };
         }
     }

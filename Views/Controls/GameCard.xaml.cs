@@ -25,6 +25,7 @@ namespace Zenith_Launcher.Views.Controls
         }
 
         public event EventHandler<Game>? LaunchRequested;
+        public event EventHandler<Game>? EditRequested;
         public event EventHandler<Game>? DeleteRequested;
 
         private Visual? _rootVisual;
@@ -79,6 +80,14 @@ namespace Zenith_Launcher.Views.Controls
             if (Game != null)
             {
                 LaunchRequested?.Invoke(this, Game);
+            }
+        }
+
+        private void OnEditClick(object sender, RoutedEventArgs e)
+        {
+            if (Game != null)
+            {
+                EditRequested?.Invoke(this, Game);
             }
         }
 

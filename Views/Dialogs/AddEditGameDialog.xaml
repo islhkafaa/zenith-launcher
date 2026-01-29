@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="Zenith_Launcher.Views.Dialogs.AddEditGameDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Add Game"
+    PrimaryButtonText="Save"
+    SecondaryButtonText="Cancel"
+    DefaultButton="Primary"
+    PrimaryButtonClick="OnPrimaryButtonClick"
+    SecondaryButtonClick="OnSecondaryButtonClick">
+
+    <StackPanel Spacing="16" MinWidth="400">
+        <TextBox
+            x:Name="TitleTextBox"
+            Header="Title"
+            PlaceholderText="Enter game title"/>
+
+        <ComboBox
+            x:Name="PlatformComboBox"
+            Header="Platform"
+            HorizontalAlignment="Stretch">
+            <x:String>Steam</x:String>
+            <x:String>Epic</x:String>
+            <x:String>GOG</x:String>
+            <x:String>Other</x:String>
+        </ComboBox>
+
+        <StackPanel Spacing="8">
+            <TextBlock Text="Install Path" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox
+                    x:Name="InstallPathTextBox"
+                    Grid.Column="0"
+                    PlaceholderText="Path to game executable"/>
+                <Button
+                    Grid.Column="1"
+                    Content="Browse..."
+                    Click="OnBrowseExecutableClick"/>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Spacing="8">
+            <TextBlock Text="Cover Image Path (Optional)" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox
+                    x:Name="CoverImageTextBox"
+                    Grid.Column="0"
+                    PlaceholderText="Path to cover image"/>
+                <Button
+                    Grid.Column="1"
+                    Content="Browse..."
+                    Click="OnBrowseCoverImageClick"/>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>

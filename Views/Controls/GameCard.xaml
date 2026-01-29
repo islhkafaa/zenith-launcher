@@ -19,6 +19,11 @@
                         <FontIcon Glyph="&#xE768;"/>
                     </MenuFlyoutItem.Icon>
                 </MenuFlyoutItem>
+                <MenuFlyoutItem Text="Edit" Click="OnEditClick">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE70F;"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
                 <MenuFlyoutSeparator/>
                 <MenuFlyoutItem Text="Delete" Click="OnDeleteClick">
                     <MenuFlyoutItem.Icon>
