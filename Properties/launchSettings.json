@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Zenith Launcher (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Zenith Launcher (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
