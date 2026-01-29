@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using System;
+using Zenith_Launcher.Data;
 using Zenith_Launcher.Services.DependencyInjection;
 using Zenith_Launcher.Services.Navigation;
 using Zenith_Launcher.ViewModels;
@@ -10,6 +11,7 @@ namespace Zenith_Launcher
     public partial class App : Application
     {
         private Window? _window;
+        private IServiceProvider? _serviceProvider;
 
         public App()
         {
@@ -21,6 +23,12 @@ namespace Zenith_Launcher
         {
             var services = new ServiceCollection();
 
+            services.AddSingleton<DatabaseContext>();
+            services.AddSingleton<DatabaseInitializer>();
+            services.AddSingleton<Data.Repositories.IGameRepository, Data.Repositories.GameRepository>();
+            services.AddSingleton<Services.GameLibrary.IGameLibraryService, Services.GameLibrary.GameLibraryService>();
+            services.AddSingleton<Data.SampleDataSeeder>();
+
             services.AddSingleton<INavigationService, NavigationService>();
 
             services.AddTransient<ShellViewModel>();
@@ -28,12 +36,21 @@ namespace Zenith_Launcher
             services.AddTransient<StoresViewModel>();
             services.AddTransient<SettingsViewModel>();
 
-            var serviceProvider = services.BuildServiceProvider();
-            ServiceLocator.Initialize(serviceProvider);
+            _serviceProvider = services.BuildServiceProvider();
+            ServiceLocator.Initialize(_serviceProvider);
         }
 
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            if (_serviceProvider != null)
+            {
+                var dbInitializer = _serviceProvider.GetRequiredService<DatabaseInitializer>();
+                dbInitializer.Initialize();
+
+                var seeder = _serviceProvider.GetRequiredService<Data.SampleDataSeeder>();
+                await seeder.SeedAsync();
+            }
+
             _window = new MainWindow();
             _window.Activate();
         }
